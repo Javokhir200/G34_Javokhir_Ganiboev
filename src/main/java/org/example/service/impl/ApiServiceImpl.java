@@ -42,6 +42,6 @@ public class ApiServiceImpl implements ApiService {
         }
         Gson gson = new Gson();
         Response resp = gson.fromJson(response.body(),Response.class);
-        return  resp.toString();
+        return  resp.getText();
     }
 }

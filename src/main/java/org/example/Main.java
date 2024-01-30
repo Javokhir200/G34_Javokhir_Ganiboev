@@ -18,6 +18,7 @@ public class Main {
         boolean onProcess = true;
         while (onProcess){
             start();
+            System.out.print("Enter the number: ");
             int startNum = scNum.nextInt();
             switch (startNum){
                 case 0 -> onProcess = false;
@@ -48,6 +49,7 @@ public class Main {
                     System.out.println("User already exist !!!");
                 }else{
                     UserMenu(loggedUser);
+                    chance=0;
                 }
             }else{
                 System.out.println("Code is incorrect !!!");
@@ -83,13 +85,13 @@ public class Main {
     private static void UserMenu(User loggedUser) {
         boolean onProcess = true;
         while (onProcess){
+            int chance = 5;
             showUserMenu();
             System.out.print("Enter the number: ");
             int userMenuNum = scNum.nextInt();
             switch (userMenuNum){
                 case 0 -> onProcess = false;
                 case 1 -> {
-                    int chance = 5;
                     System.out.print("Enter new password: ");
                     String password = scStr.nextLine();
                     String confirm = userService.confirm(loggedUser.getEmail());
@@ -106,11 +108,13 @@ public class Main {
                         }
                     }
                 }case 2->{
-                    System.out.println("Enter the month's number: ");
+                    System.out.print("Enter the month's number: ");
                     Integer monthNum = scNum.nextInt();
-                    System.out.println("Enter the day's number: ");
+                    System.out.print("Enter the day's number: ");
                     Integer dayNum = scNum.nextInt();
                     System.out.println(apiService.sendFact(monthNum, dayNum));
+                }case 3->{
+                    userService.showMyData(loggedUser.getUserId());
                 }
                 default -> System.out.println("Please enter the number between 0 to 2 !!!");
             }
@@ -120,7 +124,8 @@ public class Main {
     private static void showUserMenu() {
         System.out.println("""
                 1.Change password
-                2.Facts about Date
+                2.Facts about date
+                3.Show my info
                 
                 0.Exit
                 """);
